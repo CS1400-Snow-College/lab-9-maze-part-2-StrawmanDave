@@ -1,0 +1,15 @@
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/bin/Debug/net8.0/lab-9-maze-part-2-StrawmanDave
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/bin/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.deps.json
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/bin/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.runtimeconfig.json
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/bin/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.dll
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/bin/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.pdb
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.GeneratedMSBuildEditorConfig.editorconfig
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.AssemblyInfoInputs.cache
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.AssemblyInfo.cs
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.csproj.CoreCompileInputs.cache
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.sourcelink.json
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.dll
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/refint/lab-9-maze-part-2-StrawmanDave.dll
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.pdb
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/lab-9-maze-part-2-StrawmanDave.genruntimeconfig.cache
+/home/david/david-progamming-1400/lab-9-maze-part-2-StrawmanDave/obj/Debug/net8.0/ref/lab-9-maze-part-2-StrawmanDave.dll

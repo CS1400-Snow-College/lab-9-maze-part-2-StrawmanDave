@@ -2,14 +2,69 @@
 
 using System.Diagnostics;
 Stopwatch stopwatch = new Stopwatch();
+string[] maze = File.ReadAllLines("maze.txt");
+char[][] mazeChar = maze.Select(item => item.ToArray()).ToArray();
 mainMenu();
 showMaze();
+int x = 0;
+int y = 0;
+Console.SetCursorPosition(x,y);
+
+do
+{
+    if(Console.ReadKey(true).Key == ConsoleKey.Escape)
+    {
+        stopwatch.Stop();
+        stopwatch.Reset();
+        mainMenu();
+        showMaze();
+        x = 0;
+        y = 0;
+        Console.SetCursorPosition(x,y);
+    }else if(Console.ReadKey(true).Key == ConsoleKey.W)
+    {
+         
+        if(tryMove(x, y, "n", mazeChar) == true)
+        {
+            y --;
+        }
+        
+    }else if(Console.ReadKey(true).Key == ConsoleKey.S)
+    {
+        
+        if(tryMove(x, y, "s", mazeChar) == true)
+        {
+            y ++;
+        }
+        
+    }else if(Console.ReadKey(true).Key == ConsoleKey.A)
+    {
+         
+        if(tryMove(x, y, "e", mazeChar) == true)
+        {
+            if(x - 1 >= 0)
+            {
+                x--;
+            }
+            
+        }
+        
+    }else if (Console.ReadKey(true).Key == ConsoleKey.D)
+    {
+        
+       if(tryMove(x, y, "w", mazeChar) == true)
+        {
+            x++;
+        }
+    }
+    Console.SetCursorPosition(x,y);
+
+}while(Console.CursorLeft != 33 || Console.CursorTop != 12);
+
+
 
 void showMaze()
 {
-    string[] maze = File.ReadAllLines("maze.txt");
-    char[][] mazeChar = maze.Select(item => item.ToArray()).ToArray();
-
     for(int i = 0; i<mazeChar.Count(); i++)
     {
         //Console.Write($"{mazeChar[i][0]}");
@@ -41,4 +96,49 @@ Console.Write("Press any key to start");
 Console.ReadKey(true);
 Console.Clear();
 stopwatch.Start();
+}
+
+bool tryMove(int x, int y, string direction, char[][] maze)
+{
+
+    if(direction == "w")
+    {
+        if(x > mazeChar[y].Length || mazeChar[y][x+1] == '*')
+        {
+            return false;
+        }else 
+        {
+            return true;
+        }
+    }else if(direction == "e")
+    {
+        if(x-1 < 0 || mazeChar[y][x-1] == '*')
+        {
+            return false;
+        }else
+        {
+            return true;
+        }
+    }else if(direction == "s")
+    { 
+        if(y > mazeChar.Count() || mazeChar[y+1][x] == '*')
+        {
+            return false;
+        }else 
+        {
+            return true;
+        }
+    }else if (direction == "n")
+    {
+        if (y-1 < 0 || mazeChar[y-1][x] == '*')
+        {
+            return false;
+        }else 
+        {
+            return true;
+        }
+    }else 
+    {
+        return false;
+    }
 }

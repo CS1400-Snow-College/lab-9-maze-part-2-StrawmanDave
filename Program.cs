@@ -2,6 +2,7 @@
 
 using System.Diagnostics;
 Stopwatch stopwatch = new Stopwatch();
+Random rand = new Random();
 string[] maze = File.ReadAllLines("maze.txt");
 char[][] mazeChar = maze.Select(item => item.ToArray()).ToArray();
 //List<string> listMaze = maze.ToList();
@@ -27,7 +28,6 @@ do
         Console.SetCursorPosition(x,y);
     }else if(Console.ReadKey(true).Key == ConsoleKey.W)
     {
-         
         if(tryMove(x, y, "n", mazeChar) == true)
         {
             y --;
@@ -46,11 +46,7 @@ do
          
         if(tryMove(x, y, "e", mazeChar) == true)
         {
-            if(x - 1 >= 0)
-            {
-                x--;
-            }
-            
+            x--;   
         }
         
     }else if (Console.ReadKey(true).Key == ConsoleKey.D)
@@ -61,7 +57,9 @@ do
             x++;
         }
     }
+    //int moveNumber = ;
     Console.SetCursorPosition(x,y);
+
 
     // if the cursor goes over a '^' then add to the score.
     if(mazeChar[y][x] == '^')
@@ -73,12 +71,176 @@ do
         Console.SetCursorPosition(0,21);
         Console.WriteLine($"Your score is {score}");
         Console.SetCursorPosition(x,y);
-        
+    }
+
+    if(mazeChar[y][x] == '$')
+    {
+        mazeChar[y][x] = ' ';
+        Console.Write(" ");
+        score = score + 200;
+        Console.SetCursorPosition(0,21);
+        Console.WriteLine($"Your score is {score}");
+        Console.SetCursorPosition(x,y);
+    }
+    if(score >= 1000)
+    {
+        for(int i = 0; i<mazeChar.Count(); i++)
+        {
+            //Console.Write($"{mazeChar[i][0]}");
+            for(int j = 0; j<mazeChar[i].Count(); j++)
+            {
+                if(mazeChar[i][j] == '|')
+                {
+                    mazeChar[i][j] = ' ';
+                    Console.SetCursorPosition(j,i);
+                    Console.Write(" ");
+                }
+            }
+        }
+        Console.SetCursorPosition(x,y);
     }
     
+    for(int i = 0; i<mazeChar.Count(); i++)
+{
+    for(int j = 0; j<mazeChar[i].Count(); j++)
+    {
+        if(mazeChar[i][j] == '%')
+        {
+            mazeChar[i][j] = ' ';
+            Console.SetCursorPosition(j,i);
+            Console.Write(" ");
+            if(rand.Next(0,4) == 0)
+            {
+                //move left
+                if(canGuirdMove(i,j,"w", mazeChar) == true)
+                {
+                    mazeChar[i][j-1] = '%';
+                    Console.SetCursorPosition(j-1,i);
+                    Console.Write("%");
+                }else
+                {
+                    mazeChar[i][j] = '%';
+                    Console.SetCursorPosition(j,i);
+                    Console.Write("%");
+                }
+
+            }else if(rand.Next(0,4) == 1)
+            {
+                //move up
+                if(canGuirdMove(i,j,"n", mazeChar) == true)
+                {
+                    mazeChar[i-1][j] = '%';
+                    Console.SetCursorPosition(j,i-1);
+                    Console.Write("%");
+                }else
+                {
+                    mazeChar[i][j] = '%';
+                    Console.SetCursorPosition(j,i);
+                    Console.Write("%");
+                }
+
+            }else if(rand.Next(0,4) == 2)
+            {
+                //move right
+                if(canGuirdMove(i,j,"e", mazeChar) == true)
+                {
+                    mazeChar[i][j+1] = '%';
+                    Console.SetCursorPosition(j+1,i);
+                    Console.Write("%");
+                }else
+                {
+                    mazeChar[i][j] = '%';
+                    Console.SetCursorPosition(j,i);
+                    Console.Write("%");
+                }
+
+            }else
+            {
+                //move down
+                if(canGuirdMove(i,j,"s", mazeChar) == true)
+                {
+                    mazeChar[i+1][j] = '%';
+                    Console.SetCursorPosition(j,i+1);
+                    Console.Write("%");
+                }else
+                {
+                    mazeChar[i][j] = '%';
+                    Console.SetCursorPosition(j,i);
+                    Console.Write("%");
+                }
+            }
+        }
+    }
+}
+//Console.SetCursorPosition(0,0);
+//showMaze();
+
+Console.SetCursorPosition(x,y);
+
+if(mazeChar[y][x] == '%')
+{
+    loseMenu();
+}
 
 }while(Console.CursorLeft != 33 || Console.CursorTop != 12);
+winMenu();
 
+void loseMenu()
+{
+    Console.Clear();
+    Console.WriteLine("You died");
+}
+void winMenu()
+{
+    Console.Clear();
+    Console.WriteLine("You made it through the maze");
+}
+
+bool canGuirdMove(int i, int j, string direction, char[][] maze)
+{
+    //can it move left
+    if(direction == "w")
+    {
+        if(j-1 < 0 || maze[i][j-1] == '*' || maze[i][j-1] == '^' || maze[i][j-1] == '|')
+        {
+            return false;
+        }else
+        {
+            return true;
+        }
+    }else if(direction == "n")
+    {// can it move up
+        if(i-1 < 0 || maze[i-1][j] == '*' || maze[i-1][j] == '^' || maze[i-1][j] == '|')
+        {
+            return false;
+        }else 
+        {
+            return true;
+        }
+    }else if(direction == "e")
+    {// can it move right
+        if(j+1 > maze.Length || maze[i][j+1] == '*' || maze[i][j+1] == '^' || maze[i][j+1] == '|')
+        {
+            return false;
+        }else
+        {
+            return true;
+        }
+    }else if(direction == "s")
+    {//can it move down
+        if(i+1 > maze.Length || maze[i+1][j] == '*' || maze[i+1][j] == '^' || maze[i+1][j] == '|')
+        {
+            return false;
+        }else
+        {
+            return true;
+        }
+    }else
+    {
+        return false;
+    }
+    
+}
 
 
 void showMaze()
@@ -121,7 +283,7 @@ bool tryMove(int x, int y, string direction, char[][] maze)
 //mazeChar[y][x+1] == '|'
     if(direction == "w")
     {
-        if(x > mazeChar[y].Length || mazeChar[y][x+1] == '*' || mazeChar[y][x+1] == '|')
+        if(x+1 > mazeChar[y].Length || mazeChar[y][x+1] == '*' || mazeChar[y][x+1] == '|')
         {
             return false;
         }else 
@@ -139,7 +301,7 @@ bool tryMove(int x, int y, string direction, char[][] maze)
         }
     }else if(direction == "s")
     { 
-        if(y > mazeChar.Count() || mazeChar[y+1][x] == '*' || mazeChar[y+1][x] == '|')
+        if(y+1 > mazeChar.Count() || mazeChar[y+1][x] == '*' || mazeChar[y+1][x] == '|')
         {
             return false;
         }else 

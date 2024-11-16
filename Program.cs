@@ -4,11 +4,15 @@ using System.Diagnostics;
 Stopwatch stopwatch = new Stopwatch();
 string[] maze = File.ReadAllLines("maze.txt");
 char[][] mazeChar = maze.Select(item => item.ToArray()).ToArray();
+//List<string> listMaze = maze.ToList();
 mainMenu();
 showMaze();
 int x = 0;
 int y = 0;
+int score = 0;
+Console.WriteLine($"Your score is {score}");
 Console.SetCursorPosition(x,y);
+
 
 do
 {
@@ -59,6 +63,20 @@ do
     }
     Console.SetCursorPosition(x,y);
 
+    // if the cursor goes over a '^' then add to the score.
+    if(mazeChar[y][x] == '^')
+    {
+        //listMaze[x][y].Replace("^", " ");
+        mazeChar[y][x] = ' ';
+        Console.Write(" ");
+        score = score + 100;
+        Console.SetCursorPosition(0,21);
+        Console.WriteLine($"Your score is {score}");
+        Console.SetCursorPosition(x,y);
+        
+    }
+    
+
 }while(Console.CursorLeft != 33 || Console.CursorTop != 12);
 
 
@@ -74,7 +92,7 @@ void showMaze()
         }
         Console.WriteLine();
     }
-    //Console.Write($"{mazeChar[0][0]}");
+    // Console.Write($"{listMaze[0][0]}");
 }
 
 void mainMenu()
@@ -100,10 +118,10 @@ stopwatch.Start();
 
 bool tryMove(int x, int y, string direction, char[][] maze)
 {
-
+//mazeChar[y][x+1] == '|'
     if(direction == "w")
     {
-        if(x > mazeChar[y].Length || mazeChar[y][x+1] == '*')
+        if(x > mazeChar[y].Length || mazeChar[y][x+1] == '*' || mazeChar[y][x+1] == '|')
         {
             return false;
         }else 
@@ -112,7 +130,7 @@ bool tryMove(int x, int y, string direction, char[][] maze)
         }
     }else if(direction == "e")
     {
-        if(x-1 < 0 || mazeChar[y][x-1] == '*')
+        if(x-1 < 0 || mazeChar[y][x-1] == '*' || mazeChar[y][x-1] == '|')
         {
             return false;
         }else
@@ -121,7 +139,7 @@ bool tryMove(int x, int y, string direction, char[][] maze)
         }
     }else if(direction == "s")
     { 
-        if(y > mazeChar.Count() || mazeChar[y+1][x] == '*')
+        if(y > mazeChar.Count() || mazeChar[y+1][x] == '*' || mazeChar[y+1][x] == '|')
         {
             return false;
         }else 
@@ -130,7 +148,7 @@ bool tryMove(int x, int y, string direction, char[][] maze)
         }
     }else if (direction == "n")
     {
-        if (y-1 < 0 || mazeChar[y-1][x] == '*')
+        if (y-1 < 0 || mazeChar[y-1][x] == '*' || mazeChar[y-1][x] == '|')
         {
             return false;
         }else 

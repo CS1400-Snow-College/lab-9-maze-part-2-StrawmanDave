@@ -201,7 +201,7 @@ bool canGuirdMove(int i, int j, string direction, char[][] maze)
     //can it move left
     if(direction == "w")
     {
-        if(j-1 < 0 || maze[i][j-1] == '*' || maze[i][j-1] == '^' || maze[i][j-1] == '|')
+        if(j-1 < 0 || maze[i][j-1] == '*' || maze[i][j-1] == '^' || maze[i][j-1] == '|' || maze[i][j-1] == '%')
         {
             return false;
         }else
@@ -210,7 +210,7 @@ bool canGuirdMove(int i, int j, string direction, char[][] maze)
         }
     }else if(direction == "n")
     {// can it move up
-        if(i-1 < 0 || maze[i-1][j] == '*' || maze[i-1][j] == '^' || maze[i-1][j] == '|')
+        if(i-1 < 0 || maze[i-1][j] == '*' || maze[i-1][j] == '^' || maze[i-1][j] == '|' || maze[i-1][j] == '%')
         {
             return false;
         }else 
@@ -219,7 +219,7 @@ bool canGuirdMove(int i, int j, string direction, char[][] maze)
         }
     }else if(direction == "e")
     {// can it move right
-        if(j+1 > maze.Length || maze[i][j+1] == '*' || maze[i][j+1] == '^' || maze[i][j+1] == '|')
+        if(j+1 > maze.Length || maze[i][j+1] == '*' || maze[i][j+1] == '^' || maze[i][j+1] == '|' || maze[i][j+1] == '%')
         {
             return false;
         }else
@@ -228,7 +228,7 @@ bool canGuirdMove(int i, int j, string direction, char[][] maze)
         }
     }else if(direction == "s")
     {//can it move down
-        if(i+1 > maze.Length || maze[i+1][j] == '*' || maze[i+1][j] == '^' || maze[i+1][j] == '|')
+        if(i+1 > maze.Length || maze[i+1][j] == '*' || maze[i+1][j] == '^' || maze[i+1][j] == '|' || maze[i+1][j] == '%')
         {
             return false;
         }else

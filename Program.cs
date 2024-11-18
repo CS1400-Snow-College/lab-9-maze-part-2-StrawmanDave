@@ -17,16 +17,7 @@ Console.SetCursorPosition(x,y);
 
 do
 {
-    if(Console.ReadKey(true).Key == ConsoleKey.Escape)
-    {
-        stopwatch.Stop();
-        stopwatch.Reset();
-        mainMenu();
-        showMaze();
-        x = 0;
-        y = 0;
-        Console.SetCursorPosition(x,y);
-    }else if(Console.ReadKey(true).Key == ConsoleKey.W)
+    if(Console.ReadKey(true).Key == ConsoleKey.W)
     {
         if(tryMove(x, y, "n", mazeChar) == true)
         {
@@ -154,7 +145,7 @@ do
                     Console.Write("%");
                 }
 
-            }else
+            }else if(rand.Next(0,4) == 3)
             {
                 //move down
                 if(canGuirdMove(i,j,"s", mazeChar) == true)
@@ -168,6 +159,11 @@ do
                     Console.SetCursorPosition(j,i);
                     Console.Write("%");
                 }
+            }else
+            {
+                mazeChar[i][j] = '%';
+                Console.SetCursorPosition(j,i);
+                Console.Write("%");
             }
         }
     }
@@ -180,20 +176,31 @@ Console.SetCursorPosition(x,y);
 if(mazeChar[y][x] == '%')
 {
     loseMenu();
+    break;
+}
+
+if(mazeChar[y][x] == '#')
+{
+    winMenu();
+    break;
 }
 
 }while(Console.CursorLeft != 33 || Console.CursorTop != 12);
-winMenu();
+
 
 void loseMenu()
 {
     Console.Clear();
     Console.WriteLine("You died");
+    Console.WriteLine($"Your score was {score}");
+    Console.WriteLine($"Your time in the maze {stopwatch}");
 }
 void winMenu()
 {
     Console.Clear();
-    Console.WriteLine("You made it through the maze");
+    Console.WriteLine("You made it through the maze!");
+    Console.WriteLine($"Your score was {score}");
+    Console.WriteLine($"Your time in the maze {stopwatch}");
 }
 
 bool canGuirdMove(int i, int j, string direction, char[][] maze)
@@ -245,6 +252,8 @@ bool canGuirdMove(int i, int j, string direction, char[][] maze)
 
 void showMaze()
 {
+    string[] maze = File.ReadAllLines("maze.txt");
+    char[][] mazeChar = maze.Select(item => item.ToArray()).ToArray();
     for(int i = 0; i<mazeChar.Count(); i++)
     {
         //Console.Write($"{mazeChar[i][0]}");
@@ -269,8 +278,6 @@ Console.WriteLine();
 Console.Write("Each coin '^' raises your score.");
 Console.WriteLine();
 Console.Write("Use the w,a,s and d keys to move and you will see your time at the end");
-Console.WriteLine();
-Console.Write("You can press the escape key to startover");
 Console.WriteLine();
 Console.Write("Press any key to start");
 Console.ReadKey(true);
